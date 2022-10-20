@@ -5,7 +5,7 @@ const createURL = (api) => {
   return process.env.NEXT_PUBLIC_RESAS_API_ENDPOINT + api;
 };
 
-export const fetchPrefectures = async () => {
+export const fetchPrefecturesList = async () => {
   const url = createURL(process.env.NEXT_PUBLIC_RESAS_API_PREFECTURES);
   const res = await fetch(url, {
     method: 'GET',

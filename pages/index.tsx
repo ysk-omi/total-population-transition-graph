@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import Areas from '../components/Areas';
 import Chart from '../components/Chart';
-import { fetchPrefectures, fetchPopulation } from '../lib/api';
+import { fetchPrefecturesList, fetchPopulation } from '../lib/api';
 
 export default function IndexPage() {
   const [prefactures, setPrefactures] = useState([]);
   const [populations, setPopulations] = useState([]);
   useEffect(() => {
-    fetchPrefectures().then((data) => {
+    fetchPrefecturesList().then((data) => {
       setPrefactures(data);
     });
 
