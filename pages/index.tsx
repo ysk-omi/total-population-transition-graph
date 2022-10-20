@@ -3,14 +3,9 @@ import Areas from '../components/Areas';
 import Chart from '../components/Chart';
 import { fetchPrefecturesList, fetchPopulation } from '../lib/api';
 
-export default function IndexPage() {
-  const [prefactures, setPrefactures] = useState([]);
+export default function IndexPage({ prefacturesList }) {
   const [populations, setPopulations] = useState([]);
   useEffect(() => {
-    fetchPrefecturesList().then((data) => {
-      setPrefactures(data);
-    });
-
     fetchPopulation(12).then((data) => {
       setPopulations([...populations, data]);
     });
@@ -19,7 +14,7 @@ export default function IndexPage() {
     <div>
       <h1>総人口推移グラフ</h1>
       <div>
-        {prefactures.map((pref, index) => (
+        {prefacturesList.map((pref, index) => (
           <div key={index}>{pref.prefName}</div>
         ))}
       </div>
@@ -46,3 +41,13 @@ export default function IndexPage() {
     </div>
   );
 }
+
+export const getStaticProps = () => {
+  return fetchPrefecturesList().then((data) => {
+    return {
+      props: {
+        prefacturesList: data,
+      },
+    };
+  });
+};
