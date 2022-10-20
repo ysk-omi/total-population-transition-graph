@@ -55,10 +55,12 @@ export default function IndexPage({ prefacturesList }) {
           </label>
         ))}
       </div>
-      {populations.length > 0 && (
+      {populations.length > 0 ? (
         <div>
           <Chart prefacturesList={prefacturesList} populations={populations}></Chart>
         </div>
+      ) : (
+        <div>都道府県を選択してください。</div>
       )}
     </div>
   );
