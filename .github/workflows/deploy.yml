@@ -29,6 +29,11 @@ jobs:
       - name: Build
         run: npm run build
         env:
+          NEXT_PUBLIC_RESAS_API_ENDPOINT: ${{ secrets.NEXT_PUBLIC_RESAS_API_ENDPOINT }}
+          NEXT_PUBLIC_RESAS_API_KEY: ${{ secrets.NEXT_PUBLIC_RESAS_API_KEY }}
+          NEXT_PUBLIC_RESAS_API_PREFECTURES: ${{ secrets.NEXT_PUBLIC_RESAS_API_PREFECTURES }}
+          NEXT_PUBLIC_RESAS_API_POPULATION: ${{ secrets.NEXT_PUBLIC_RESAS_API_POPULATION }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_PAGES: true
 
       # ビルドする
