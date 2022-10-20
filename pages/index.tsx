@@ -19,24 +19,7 @@ export default function IndexPage({ prefacturesList }) {
         ))}
       </div>
       <div>
-        {populations.map((pops, index) => (
-          <div key={index}>
-            <div>{pops.boundaryYear}</div>
-            <div>
-              {pops.data.map((p, index) => (
-                <div key={index}>
-                  <p>{p.label}</p>
-                  {p.data.map((y, index) => (
-                    <div key={index}>
-                      <p>{y.year}</p>
-                      <p>{y.value}</p>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
+        <Chart populations={populations}></Chart>
       </div>
     </div>
   );
