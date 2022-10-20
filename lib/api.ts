@@ -27,7 +27,7 @@ export const fetchPopulation = async (prefCode: Number) => {
       'X-API-KEY': process.env.NEXT_PUBLIC_RESAS_API_KEY,
     },
   });
-  const data = (await res.json()) as { message: string; result: Populations[] };
-  console.log(data.result);
+  const data = (await res.json()) as { message: string; result: Populations };
+  data.result.prefCode = prefCode;
   return data.result;
 };

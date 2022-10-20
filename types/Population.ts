@@ -11,4 +11,5 @@ interface PopulationsData {
 export interface Populations {
   boundaryYear: Number;
   data: PopulationsData[];
+  prefCode: Number;
 }
