@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import Areas from '../components/Areas';
+import { useState } from 'react';
 import Chart from '../components/Chart';
 import { fetchPrefecturesList, fetchPopulation } from '../lib/api';
 
