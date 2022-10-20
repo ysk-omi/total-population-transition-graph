@@ -1,6 +1,7 @@
-interface Population {
+export interface Population {
   year: Number;
   value: Number;
+  prefCode: Number;
 }
 
 interface PopulationsData {

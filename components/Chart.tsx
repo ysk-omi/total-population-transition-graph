@@ -1,10 +1,15 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import { useEffect, useState } from 'react';
+import { Population } from '../types/Population';
+import { Series } from '../types/Series';
 
-export default function Chart({ populations }) {
-  const options = {
+export default function Chart({ prefacturesList, populations }) {
+  const [dataLabelList, setDataLabelList] = useState([]);
+  const [selectedLabel, setSelectedLabel] = useState(0);
+  const [options, setOptions] = useState({
     title: {
-      text: 'My chart',
+      text: '',
     },
     xAxis: {
       title: {
@@ -22,31 +27,58 @@ export default function Chart({ populations }) {
         pointStart: 1965,
       },
     },
-    series: [
-      {
-        name: 'tokyo',
-        data: [
-          43934, 48656, 65165, 81827, 112143, 142383, 171533, 165174, 155157, 161454, 154610, 142383, 171533, 165174,
-          171533, 165174,
-        ],
-      },
-      {
-        name: 'osaka',
-        data: [
-          24916, 37941, 29742, 29851, 32490, 30282, 38121, 36885, 33726, 34243, 31050, 30282, 38121, 36885, 33726,
-          38121,
-        ],
-      },
-    ],
-  };
+    series: [],
+  });
 
-  const getOptions = () => {
-    return options;
-  };
+  /**
+   * optionsの値をマージする
+   * @param opt - 更新したい値のオブジェクト
+   */
+  const margeOptions = (opt: Object): void => {};
+
+  // データのラベルを取得
+  useEffect(() => {
+    if (populations[0]) {
+      const LabelList: String[] = [];
+      populations[0].data.forEach((element) => {
+        LabelList.push(element.label);
+      });
+      setDataLabelList(LabelList);
+    }
+  }, [populations]);
+
+  // options.seriesの値を取得
+  useEffect(() => {
+    const series: Series[] = [];
+    for (const p of populations) {
+      let typeData: Population[] = p.data[selectedLabel].data;
+      let prefData: Series = {
+        name: prefacturesList[p.prefCode - 1].prefName,
+        data: [],
+      };
+
+      for (const d of typeData) {
+        prefData.data.push(d.value);
+      }
+
+      series.push(prefData);
+    }
+    const newSeries = {
+      series: series,
+    };
+    const newOptions = { ...options, ...newSeries };
+    setOptions(newOptions);
+  }, [populations, selectedLabel, prefacturesList]);
 
   return (
     <div>
-      <HighchartsReact highcharts={Highcharts} options={getOptions()}></HighchartsReact>
+      <h2>{dataLabelList[selectedLabel]}</h2>
+      <HighchartsReact highcharts={Highcharts} options={options}></HighchartsReact>
+      {dataLabelList.map((name, index) => (
+        <button key={index} data-selected={selectedLabel === index} onClick={() => setSelectedLabel(index)}>
+          {name}
+        </button>
+      ))}
     </div>
   );
 }

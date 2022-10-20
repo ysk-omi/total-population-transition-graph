@@ -46,7 +46,7 @@ export default function IndexPage({ prefacturesList }) {
 
   return (
     <div>
-      <h1>総人口推移グラフ</h1>
+      <h1>人口推移グラフ</h1>
       <div>
         {prefacturesList.map((pref, index) => (
           <label key={index}>
@@ -57,7 +57,7 @@ export default function IndexPage({ prefacturesList }) {
       </div>
       {populations.length > 0 && (
         <div>
-          <Chart populations={populations}></Chart>
+          <Chart prefacturesList={prefacturesList} populations={populations}></Chart>
         </div>
       )}
     </div>
