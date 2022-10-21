@@ -4,6 +4,7 @@ import Chart from '../components/Chart';
 import { fetchPrefecturesList, fetchPopulation } from '../lib/api';
 import Head from 'next/head';
 import styles from '../styles/IndexPage.module.scss';
+import Checkbox from '../components/Checkbox';
 
 export default function IndexPage({ prefacturesList }) {
   const [checked, setChecked] = useState(Array(prefacturesList.length).fill(false));
@@ -54,10 +55,9 @@ export default function IndexPage({ prefacturesList }) {
       </Head>
       <div className={styles.areas}>
         {prefacturesList.map((pref, index) => (
-          <label key={index}>
-            <input type='checkbox' checked={checked[index]} onChange={() => togglePopuration(pref.prefCode)} />
-            <span>{pref.prefName}</span>
-          </label>
+          <div className={styles.area} key={index}>
+            <Checkbox prefacture={pref} checked={checked[index]} onChange={togglePopuration}></Checkbox>
+          </div>
         ))}
       </div>
       <div className={styles.chart}>
