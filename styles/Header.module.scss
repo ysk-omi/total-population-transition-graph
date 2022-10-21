@@ -2,13 +2,22 @@
 @use '~/styles/_mixin' as *;
 
 .header {
-  padding: 20px 80px;
-  @include mq() {
-    padding: 20px 24px;
-  }
+  padding: 20px 0;
+  background-color: $color-white;
+  box-shadow: 0px 2px 20px rgba($color-black, 0.1);
 }
 
 .title {
+  max-width: 1440px;
+  padding: 0 80px;
+  margin: auto;
   font-weight: bold;
-  font-size: 28px;
+  font-size: 16px;
+  @include mq() {
+    padding: 0 24px;
+  }
+}
+
+.icon {
+  margin-right: 10px;
 }

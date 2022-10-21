@@ -4,5 +4,24 @@
 .footer {
   position: absolute;
   bottom: 0;
-  padding: 20px 80px;
+  width: 100%;
+  padding: 16px 0;
+  background-color: $color-gray;
+}
+
+.list {
+  max-width: 1440px;
+  padding: 0 80px;
+  margin: auto;
+  font-size: 10px;
+  @include mq() {
+    padding: 0 24px;
+  }
+  li {
+    margin: 10px;
+  }
+}
+
+.title {
+  margin-right: 10px;
 }

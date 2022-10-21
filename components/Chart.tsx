@@ -3,6 +3,7 @@ import HighchartsReact from 'highcharts-react-official';
 import { useEffect, useState } from 'react';
 import { Population } from '../types/Population';
 import { Series } from '../types/Series';
+import styles from '../styles/Chart.module.scss';
 
 export default function Chart({ prefacturesList, populations }) {
   const [dataLabelList, setDataLabelList] = useState([]);
@@ -71,14 +72,23 @@ export default function Chart({ prefacturesList, populations }) {
   }, [populations, selectedLabel, prefacturesList]);
 
   return (
-    <div>
-      <h2>{dataLabelList[selectedLabel]}</h2>
-      <HighchartsReact highcharts={Highcharts} options={options}></HighchartsReact>
-      {dataLabelList.map((name, index) => (
-        <button key={index} data-selected={selectedLabel === index} onClick={() => setSelectedLabel(index)}>
-          {name}
-        </button>
-      ))}
-    </div>
+    <section className={styles.wrapper}>
+      <h2 className={styles.title}>{dataLabelList[selectedLabel]}</h2>
+      <div className={styles.inner}>
+        <HighchartsReact highcharts={Highcharts} options={options}></HighchartsReact>
+      </div>
+      <div className={styles.buttons}>
+        {dataLabelList.map((name, index) => (
+          <button
+            className={styles.button}
+            key={index}
+            data-selected={selectedLabel === index}
+            onClick={() => setSelectedLabel(index)}
+          >
+            {name}
+          </button>
+        ))}
+      </div>
+    </section>
   );
 }

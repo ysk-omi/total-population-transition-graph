@@ -6,35 +6,38 @@
   display: flex;
   align-items: center;
   padding: 3px;
+  background-color: $color-gray;
+  border-radius: 4px;
+  padding: 6px 8px;
 }
 
 .text {
   position: relative;
-  height: 20px;
+  height: 14px;
   display: flex;
   align-items: center;
-  padding-left: 24px;
-  font-size: 14px;
+  padding-left: 20px;
+  font-size: 12px;
   &::before {
     position: absolute;
     top: 0;
     left: 0;
     content: ' ';
     display: block;
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     border-radius: 2px;
     border: 1px solid $color-black;
   }
   &::after {
     position: absolute;
-    top: 6px;
-    left: 5px;
+    top: 3.5px;
+    left: 3.5px;
     margin: auto;
     content: ' ';
     display: inline-block;
-    width: 8px;
-    height: 4px;
+    width: 7px;
+    height: 5px;
     border-left: 2px solid $color-white;
     border-bottom: 2px solid $color-white;
     transform: rotate(-45deg);
