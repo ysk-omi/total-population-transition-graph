@@ -1,6 +1,7 @@
 import styles from '../styles/Footer.module.scss';
+import { NextPage } from 'next';
 
-export default function Footer() {
+const Footer: NextPage = () => {
   return (
     <footer className={styles.footer}>
       <ul className={styles.list}>
@@ -41,4 +42,6 @@ export default function Footer() {
       </ul>
     </footer>
   );
-}
+};
+
+export default Footer;

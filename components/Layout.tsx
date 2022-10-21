@@ -1,9 +1,13 @@
-import { PropsWithChildren } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import styles from '../styles/Layout.module.scss';
+import { NextPage } from 'next';
 
-export default function Layout({ children }: PropsWithChildren) {
+type Props = {
+  children?: React.ReactNode;
+};
+
+const Layout: NextPage<Props> = ({ children }: Props) => {
   return (
     <div className={styles.wrapper}>
       <Header></Header>
@@ -11,4 +15,6 @@ export default function Layout({ children }: PropsWithChildren) {
       <Footer></Footer>
     </div>
   );
-}
+};
+
+export default Layout;

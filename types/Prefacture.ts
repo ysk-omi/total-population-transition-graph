@@ -1,4 +1,4 @@
 export interface Prefacture {
-  prefCode: Number;
+  prefCode: number;
   prefName: String;
 }

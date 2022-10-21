@@ -5,9 +5,19 @@ import { fetchPrefecturesList, fetchPopulation } from '../lib/api';
 import Head from 'next/head';
 import styles from '../styles/IndexPage.module.scss';
 import Checkbox from '../components/Checkbox';
+import { NextPage } from 'next';
+import { Prefacture } from '../types/Prefacture';
 
-export default function IndexPage({ prefacturesList }) {
-  const [checked, setChecked] = useState(Array(prefacturesList[prefacturesList.length - 1].prefCode + 1).fill(false));
+type Props = {
+  prefacturesList: Prefacture[];
+};
+
+const IndexPage: NextPage<Props> = ({ prefacturesList }: Props) => {
+  //最後のコード番号を取得
+  const lastCord = prefacturesList[prefacturesList.length - 1].prefCode;
+
+  //最後のコード番号+1の配列を作る
+  const [checked, setChecked] = useState(Array(lastCord + 1).fill(false));
   const [populations, setPopulations] = useState([]);
   const [isAreaOpen, setIsAreaOpen] = useState(false);
 
@@ -22,7 +32,7 @@ export default function IndexPage({ prefacturesList }) {
    * チェックボックスのトグル
    * @param index
    */
-  const _toggleCheck = (index: number) => {
+  const _toggleCheck = (index: number): void => {
     const checkedClone = checked.concat();
     checkedClone[index] = !checkedClone[index];
     setChecked(checkedClone);
@@ -32,7 +42,7 @@ export default function IndexPage({ prefacturesList }) {
    * 人口構成のトグル
    * @param prefCode
    */
-  const togglePopuration = (prefCode: number) => {
+  const togglePopuration = (prefCode: number): void => {
     if (!checked[prefCode]) {
       // すでにデータがあるか確認する
       const isFetched = populations.find((p) => {
@@ -90,7 +100,7 @@ export default function IndexPage({ prefacturesList }) {
       </section>
     </Layout>
   );
-}
+};
 
 export const getStaticProps = () => {
   return fetchPrefecturesList().then((data) => {
@@ -101,3 +111,5 @@ export const getStaticProps = () => {
     };
   });
 };
+
+export default IndexPage;

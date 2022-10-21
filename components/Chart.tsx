@@ -5,7 +5,16 @@ import { Population } from '../types/Population';
 import { Series } from '../types/Series';
 import styles from '../styles/Chart.module.scss';
 
-export default function Chart({ prefacturesList, populations }) {
+import { Prefacture } from '../types/Prefacture';
+import { Populations } from '../types/Population';
+import { NextPage } from 'next';
+
+type Props = {
+  prefacturesList: Prefacture[];
+  populations: Populations[];
+};
+
+const Chart: NextPage<Props> = ({ prefacturesList, populations }: Props) => {
   const [dataLabelList, setDataLabelList] = useState([]);
   const [selectedLabel, setSelectedLabel] = useState(0);
   const [options, setOptions] = useState({
@@ -91,4 +100,6 @@ export default function Chart({ prefacturesList, populations }) {
       </div>
     </div>
   );
-}
+};
+
+export default Chart;

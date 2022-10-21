@@ -1,6 +1,7 @@
 import styles from '../styles/Header.module.scss';
+import { NextPage } from 'next';
 
-export default function Header() {
+const Header: NextPage = () => {
   return (
     <header className={styles.header}>
       <h1 className={styles.title}>
@@ -8,4 +9,5 @@ export default function Header() {
       </h1>
     </header>
   );
-}
+};
+export default Header;
