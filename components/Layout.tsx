@@ -7,7 +7,7 @@ export default function Layout({ children }: PropsWithChildren) {
   return (
     <div className={styles.wrapper}>
       <Header></Header>
-      <main>{children}</main>
+      <main className={styles.container}>{children}</main>
       <Footer></Footer>
     </div>
   );

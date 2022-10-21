@@ -1,15 +1,14 @@
 @use '~/styles/_variables' as *;
 @use '~/styles/_mixin' as *;
 
-.wrapper {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-}
-
-.container {
-  padding: 0 80px;
+.header {
+  padding: 20px 80px;
   @include mq() {
     padding: 20px 24px;
   }
+}
+
+.title {
+  font-weight: bold;
+  font-size: 28px;
 }
