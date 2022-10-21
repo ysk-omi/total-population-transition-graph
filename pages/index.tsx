@@ -9,6 +9,14 @@ import Checkbox from '../components/Checkbox';
 export default function IndexPage({ prefacturesList }) {
   const [checked, setChecked] = useState(Array(prefacturesList[prefacturesList.length - 1].prefCode + 1).fill(false));
   const [populations, setPopulations] = useState([]);
+  const [isAreaOpen, setIsAreaOpen] = useState(false);
+
+  /**
+   * 都道府県選択ボタンをクリックした時の処理
+   */
+  const toggleArea = () => {
+    setIsAreaOpen(!isAreaOpen);
+  };
 
   /**
    * チェックボックスのトグル
@@ -53,20 +61,33 @@ export default function IndexPage({ prefacturesList }) {
       <Head>
         <title>人口推移グラフ</title>
       </Head>
-      <div className={styles.areas}>
-        {prefacturesList.map((pref, index) => (
-          <div className={styles.area} key={index}>
-            <Checkbox prefacture={pref} checked={checked[pref.prefCode]} onChange={togglePopuration}></Checkbox>
+      <button className={`${styles.areaButton} ${styles.areaButtonHeader}`} onClick={toggleArea} data-open={isAreaOpen}>
+        {isAreaOpen ? 'グラフを表示' : '都道府県を選択'}
+      </button>
+      <section className={`${styles.section} ${styles.sectionArea}`} data-open={isAreaOpen}>
+        <div className={styles.sectionInner}>
+          <h2 className={styles.title}>都道府県</h2>
+          <div className={styles.areas}>
+            {prefacturesList.map((pref, index) => (
+              <div className={styles.area} key={index}>
+                <Checkbox prefacture={pref} checked={checked[pref.prefCode]} onChange={togglePopuration}></Checkbox>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div className={styles.chart}>
+        </div>
+      </section>
+      <section className={styles.section}>
         {populations.length > 0 ? (
           <Chart prefacturesList={prefacturesList} populations={populations}></Chart>
         ) : (
-          <div className={styles.chart__zero}>都道府県を選択してください。</div>
+          <div className={styles.chart__zero}>
+            <p>都道府県を選択してください。</p>
+            <button className={styles.areaButton} onClick={toggleArea} data-open={isAreaOpen}>
+              {isAreaOpen ? 'グラフを表示' : '都道府県を選択'}
+            </button>
+          </div>
         )}
-      </div>
+      </section>
     </Layout>
   );
 }

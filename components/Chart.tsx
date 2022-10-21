@@ -72,7 +72,7 @@ export default function Chart({ prefacturesList, populations }) {
   }, [populations, selectedLabel, prefacturesList]);
 
   return (
-    <section className={styles.wrapper}>
+    <div className={styles.wrapper}>
       <h2 className={styles.title}>{dataLabelList[selectedLabel]}</h2>
       <div className={styles.inner}>
         <HighchartsReact highcharts={Highcharts} options={options}></HighchartsReact>
@@ -89,6 +89,6 @@ export default function Chart({ prefacturesList, populations }) {
           </button>
         ))}
       </div>
-    </section>
+    </div>
   );
 }
