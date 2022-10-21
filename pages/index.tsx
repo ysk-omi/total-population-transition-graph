@@ -3,6 +3,7 @@ import Layout from '../components/Layout';
 import Chart from '../components/Chart';
 import { fetchPrefecturesList, fetchPopulation } from '../lib/api';
 import Head from 'next/head';
+import styles from '../styles/IndexPage.module.scss';
 
 export default function IndexPage({ prefacturesList }) {
   const [checked, setChecked] = useState(Array(prefacturesList.length).fill(false));
@@ -51,7 +52,7 @@ export default function IndexPage({ prefacturesList }) {
       <Head>
         <title>人口推移グラフ</title>
       </Head>
-      <div>
+      <div className={styles.areas}>
         {prefacturesList.map((pref, index) => (
           <label key={index}>
             <input type='checkbox' checked={checked[index]} onChange={() => togglePopuration(pref.prefCode)} />
@@ -59,13 +60,13 @@ export default function IndexPage({ prefacturesList }) {
           </label>
         ))}
       </div>
-      {populations.length > 0 ? (
-        <div>
+      <div className={styles.chart}>
+        {populations.length > 0 ? (
           <Chart prefacturesList={prefacturesList} populations={populations}></Chart>
-        </div>
-      ) : (
-        <div>都道府県を選択してください。</div>
-      )}
+        ) : (
+          <div className={styles.chart__zero}>都道府県を選択してください。</div>
+        )}
+      </div>
     </Layout>
   );
 }
