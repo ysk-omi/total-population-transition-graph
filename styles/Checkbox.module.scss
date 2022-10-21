@@ -1,0 +1,63 @@
+@use '~/styles/_variables' as *;
+@use '~/styles/_mixin' as *;
+
+.label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 3px;
+}
+
+.text {
+  position: relative;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  font-size: 14px;
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: ' ';
+    display: block;
+    width: 18px;
+    height: 18px;
+    border-radius: 2px;
+    border: 1px solid $color-black;
+  }
+  &::after {
+    position: absolute;
+    top: 6px;
+    left: 5px;
+    margin: auto;
+    content: ' ';
+    display: inline-block;
+    width: 8px;
+    height: 4px;
+    border-left: 2px solid $color-white;
+    border-bottom: 2px solid $color-white;
+    transform: rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+.input {
+  display: block;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  &:checked {
+    + .text {
+      &::before {
+        border: 1px solid $color-blue;
+        background-color: $color-blue;
+      }
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+}
