@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Layout from '../components/Layout';
 import Chart from '../components/Chart';
 import { fetchPrefecturesList, fetchPopulation } from '../lib/api';
 
@@ -45,8 +46,7 @@ export default function IndexPage({ prefacturesList }) {
   };
 
   return (
-    <div>
-      <h1>人口推移グラフ</h1>
+    <Layout>
       <div>
         {prefacturesList.map((pref, index) => (
           <label key={index}>
@@ -62,7 +62,7 @@ export default function IndexPage({ prefacturesList }) {
       ) : (
         <div>都道府県を選択してください。</div>
       )}
-    </div>
+    </Layout>
   );
 }
 
