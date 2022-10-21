@@ -7,7 +7,7 @@ import styles from '../styles/IndexPage.module.scss';
 import Checkbox from '../components/Checkbox';
 
 export default function IndexPage({ prefacturesList }) {
-  const [checked, setChecked] = useState(Array(prefacturesList.length).fill(false));
+  const [checked, setChecked] = useState(Array(prefacturesList[prefacturesList.length - 1].prefCode + 1).fill(false));
   const [populations, setPopulations] = useState([]);
 
   /**
@@ -25,7 +25,7 @@ export default function IndexPage({ prefacturesList }) {
    * @param prefCode
    */
   const togglePopuration = (prefCode: number) => {
-    if (!checked[prefCode - 1]) {
+    if (!checked[prefCode]) {
       // すでにデータがあるか確認する
       const isFetched = populations.find((p) => {
         return p.prefCode === prefCode;
@@ -35,7 +35,7 @@ export default function IndexPage({ prefacturesList }) {
         fetchPopulation(prefCode).then((data) => {
           setPopulations([...populations, data]);
           // 取得が完了したらチェックを入れる
-          _toggleCheck(prefCode - 1);
+          _toggleCheck(prefCode);
         });
       }
     } else {
@@ -44,7 +44,7 @@ export default function IndexPage({ prefacturesList }) {
         return p.prefCode !== prefCode;
       });
       setPopulations(newPopulations);
-      _toggleCheck(prefCode - 1);
+      _toggleCheck(prefCode);
     }
   };
 
@@ -56,7 +56,7 @@ export default function IndexPage({ prefacturesList }) {
       <div className={styles.areas}>
         {prefacturesList.map((pref, index) => (
           <div className={styles.area} key={index}>
-            <Checkbox prefacture={pref} checked={checked[index]} onChange={togglePopuration}></Checkbox>
+            <Checkbox prefacture={pref} checked={checked[pref.prefCode]} onChange={togglePopuration}></Checkbox>
           </div>
         ))}
       </div>
