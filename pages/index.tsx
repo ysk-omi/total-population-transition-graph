@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Layout from '../components/Layout';
 import Chart from '../components/Chart';
 import { fetchPrefecturesList, fetchPopulation } from '../lib/api';
+import Head from 'next/head';
 
 export default function IndexPage({ prefacturesList }) {
   const [checked, setChecked] = useState(Array(prefacturesList.length).fill(false));
@@ -47,6 +48,9 @@ export default function IndexPage({ prefacturesList }) {
 
   return (
     <Layout>
+      <Head>
+        <title>人口推移グラフ</title>
+      </Head>
       <div>
         {prefacturesList.map((pref, index) => (
           <label key={index}>
