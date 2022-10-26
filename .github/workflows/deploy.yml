@@ -42,7 +42,7 @@ jobs:
 
       # GitHub Pages にデプロイする
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: ysk-omi/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
