@@ -18,7 +18,7 @@ export const fetchPrefecturesList = async () => {
   return data.result;
 };
 
-export const fetchPopulation = async (prefCode: Number) => {
+export const fetchPopulation = async (prefCode: number) => {
   const url = createURL(`${process.env.NEXT_PUBLIC_RESAS_API_POPULATION}?prefCode=${prefCode}&cityCode=-`);
   const res = await fetch(url, {
     method: 'GET',
