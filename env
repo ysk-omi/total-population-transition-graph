@@ -1,0 +1,4 @@
+NEXT_PUBLIC_RESAS_API_ENDPOINT=https://opendata.resas-portal.go.jp/
+NEXT_PUBLIC_RESAS_API_KEY=APIキー
+NEXT_PUBLIC_RESAS_API_PREFECTURES=api/v1/prefectures
+NEXT_PUBLIC_RESAS_API_POPULATION=api/v1/population/composition/perYear
