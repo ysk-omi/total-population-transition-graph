@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { Population } from '../types/Population';
 import { Series } from '../types/Series';
 import styles from '../styles/Chart.module.scss';
-
 import { Prefacture } from '../types/Prefacture';
 import { Populations } from '../types/Population';
 import { NextPage } from 'next';
@@ -15,6 +14,13 @@ type Props = {
 };
 
 const Chart: NextPage<Props> = ({ prefacturesList, populations }: Props) => {
+  Highcharts.setOptions({
+    lang: {
+      numericSymbols: ['万', '億'],
+      numericSymbolMagnitude: 10000,
+    },
+  });
+
   const [dataLabelList, setDataLabelList] = useState([]);
   const [selectedLabel, setSelectedLabel] = useState(0);
   const [options, setOptions] = useState({
@@ -38,6 +44,12 @@ const Chart: NextPage<Props> = ({ prefacturesList, populations }: Props) => {
       },
     },
     series: [],
+    accessibility: {
+      enabled: false,
+    },
+    lang: {
+      numericSymbols: ['千', '百万', '十億', '兆', '千兆', '百京'],
+    },
   });
 
   // データのラベルを取得
