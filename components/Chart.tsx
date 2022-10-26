@@ -40,12 +40,6 @@ const Chart: NextPage<Props> = ({ prefacturesList, populations }: Props) => {
     series: [],
   });
 
-  /**
-   * optionsの値をマージする
-   * @param opt - 更新したい値のオブジェクト
-   */
-  const margeOptions = (opt: object): void => {};
-
   // データのラベルを取得
   useEffect(() => {
     if (populations[0]) {
