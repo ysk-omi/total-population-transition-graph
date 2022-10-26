@@ -7,7 +7,11 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
 
     steps:
@@ -15,17 +19,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # Node.js のセットアップをする
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 16
 
-      # パッケージをインストールする
       - name: Install
         run: npm install
 
-      # ビルドする
       - name: Build
         run: npm run build
         env:
@@ -36,25 +37,14 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_PAGES: true
 
-      # ビルドする
       - name: Export
         run: npm run export
 
-      # GitHub Pages にデプロイする
-      - name: Deploy
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./out
-  deploy:
-    needs: build
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@main
