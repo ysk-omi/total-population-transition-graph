@@ -1,16 +1,16 @@
 export interface Population {
-  year: Number;
-  value: Number;
-  prefCode: Number;
+  year: number;
+  value: number;
+  prefCode: number;
 }
 
 interface PopulationsData {
-  label: String;
+  label: string;
   data: Population[];
 }
 
 export interface Populations {
-  boundaryYear: Number;
+  boundaryYear: number;
   data: PopulationsData[];
-  prefCode: Number;
+  prefCode: number;
 }

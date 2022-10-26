@@ -1,4 +1,4 @@
 export interface Series {
-  name: String;
-  data: Number[];
+  name: string;
+  data: number[];
 }
