@@ -1,10 +1,19 @@
 name: Deploy to GitHub Pages
 
-# main ブランチ の push 時にこのワークフローを実行する
 on:
   push:
-    branches:
-      - main
+    branches: ['main']
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -15,18 +24,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # main ブランチを取得する
       - name: Checkout
         uses: actions/checkout@v3
-
+      - name: Setup Pages
+        uses: actions/configure-pages@v1
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 16
-
       - name: Install
         run: npm install
-
       - name: Build
         run: npm run build
         env:
@@ -36,15 +43,12 @@ jobs:
           NEXT_PUBLIC_RESAS_API_POPULATION: ${{ secrets.NEXT_PUBLIC_RESAS_API_POPULATION }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_PAGES: true
-
       - name: Export
         run: npm run export
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./out
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@main
